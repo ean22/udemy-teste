@@ -13,6 +13,15 @@
 		},	
 		"ghcr.io/devcontainers/features/common-utils:2": {},
 		"ghcr.io/devcontainers-extra/features/zsh-plugins:0": {}
+	},
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vmware.vscode-boot-dev-pack" //spring boot tools
+			]
+		}
 	}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -20,9 +29,6 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "java -version",
-
-	// Configure tool-specific properties.
-	// "customizations": {},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
