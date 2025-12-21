@@ -22,13 +22,26 @@
 				"vmware.vscode-boot-dev-pack" //spring boot tools
 			]
 		}
+	},
+
+	"postStartCommand": [
+		"git pull", 
+		"gradle build"
+	],
+
+	
+	"portsAttributes": {
+		"8080": {
+			"label": "SpringApplication",
+			"onAutoForward": "openBrowser"
+		}
 	}
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
+	
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "java -version",
+	
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [8020,8030,8040],
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
