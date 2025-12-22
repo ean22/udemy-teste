@@ -25,15 +25,16 @@
 	},
 
 	"postStartCommand": [
-		"git pull", 
-		"gradle build"
+		"bash",
+    	"-c",
+    	"git pull origin main && gradle build"
 	],
 
 	
 	"portsAttributes": {
 		"8080": {
 			"label": "SpringApplication",
-			"onAutoForward": "openBrowser"
+			"onAutoForward": "openBrowserOnce"
 		}
 	}
 	
