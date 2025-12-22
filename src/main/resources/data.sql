@@ -1,3 +1,8 @@
-CREATE TABLE Produtos{
-    INTEGER id NOT 
-}
+CREATE TABLE IF NOT EXISTS Produtos(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    descricao  VARCHAR(255) NOT NULL,
+    preco NUMERIC(18, 2) NOT NULL
+);
+
+
