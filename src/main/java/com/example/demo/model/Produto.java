@@ -14,7 +14,7 @@ import lombok.Setter;
 public class Produto {
     @Id
     @Column(name = "id")
-    private int id;
+    private String id;
     
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -28,7 +28,7 @@ public class Produto {
     @Override
     public String toString(){
         return """
-                id: %d
+                id: %s
                 nome: %s
                 descrição: %s
                 preço: %f
