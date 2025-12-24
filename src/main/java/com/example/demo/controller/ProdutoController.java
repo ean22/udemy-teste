@@ -51,6 +51,11 @@ public class ProdutoController {
             return produto.get();
         } else return null;
     }
+
+    @PostMapping("/delete/{id}")
+    public void deletarIdProdutos(@PathVariable String id){
+        produtoRepository.deleteById(id);
+    }
     
     
 }
