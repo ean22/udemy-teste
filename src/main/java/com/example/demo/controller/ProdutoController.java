@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -54,6 +56,14 @@ public class ProdutoController {
             return produtoBanco.get();
         } else return null;
     }
+
+    @GetMapping("/nome")
+    public List<Produto> buscarNomeProduto(@RequestParam("nome") String nome) {
+        List<Produto> produtoBanco = produtoRepository.findByNome(nome);
+
+        return produtoBanco;
+    }
+    
 
     @DeleteMapping("{id}")
     public void deletarIdProduto(@PathVariable String id){
