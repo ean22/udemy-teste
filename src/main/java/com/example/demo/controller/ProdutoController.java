@@ -43,25 +43,18 @@ public class ProdutoController {
 
     @GetMapping("/")
     public List<Produto> listarProduto() {
-        final List<Produto> produtos = produtoRepository.findAll();
-
-        return produtos;
+        return produtoRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Produto buscarIdProduto(@PathVariable String id){
-        Optional<Produto> produtoBanco = produtoRepository.findById(id);
-
-        if(produtoBanco.isPresent()){
-            return produtoBanco.get();
-        } else return null;
+        return produtoRepository.findById(id)
+        .orElse(null);
     }
 
     @GetMapping("/nome")
     public List<Produto> buscarNomeProduto(@RequestParam("nome") String nome) {
-        List<Produto> produtoBanco = produtoRepository.findByNome(nome);
-
-        return produtoBanco;
+        return produtoRepository.findByNome(nome);
     }
     
 
