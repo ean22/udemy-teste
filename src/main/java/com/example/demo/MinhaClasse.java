@@ -17,7 +17,5 @@ public class MinhaClasse {
         %s
 
         """.formatted(appPropertiesVariavel);
-    }
-    
-    
+    } 
 }
