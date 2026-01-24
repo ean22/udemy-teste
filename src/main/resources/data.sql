@@ -1,8 +1,0 @@
-CREATE TABLE IF NOT EXISTS Produtos(
-    id VARCHAR(255) NOT NULL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    descricao  VARCHAR(255) NOT NULL,
-    preco NUMERIC(18, 2) NOT NULL
-);
-
-
