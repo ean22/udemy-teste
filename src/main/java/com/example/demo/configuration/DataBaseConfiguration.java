@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 @Configuration
 public class DataBaseConfiguration {
     
@@ -26,7 +28,7 @@ public class DataBaseConfiguration {
     
     @Bean
     public DataSource dataSource(){
-        DriverManagerDataSource ds = new DriverManagerDataSource()
+        DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setUrl(url);
         ds.setUsername(username);
         ds.setPassword(password);
@@ -35,5 +37,10 @@ public class DataBaseConfiguration {
         return ds;
     }
 
-    
+    @Bean
+    public DataSource hikariDataSource() {
+        DataSource ds = new HikariDataSource();
+
+        return ds;
+    }
 }
