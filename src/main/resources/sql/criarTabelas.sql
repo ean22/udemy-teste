@@ -1,11 +1,11 @@
-CREATE TABLE Autor (
+CREATE TABLE autor (
     id UUID NOT NULL PRIMARY KEY,
     nome VARCHAR( 254 ) NOT NULL,
     data_nascimento DATE NOT NULL,
     nacionalidade VARCHAR( 254 ) NOT NULL
 );
 
-CREATE TABLE Livro (
+CREATE TABLE livro (
     id UUID NOT NULL PRIMARY KEY,
     isbn VARCHAR( 10 ) NOT NULL,
     titulo VARCHAR( 254 ) NOT NULL,
