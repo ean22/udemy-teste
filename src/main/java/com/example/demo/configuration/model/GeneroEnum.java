@@ -1,11 +1,13 @@
 package com.example.demo.configuration.model;
 
 public enum GeneroEnum {
-    FICCAO("c"),
-    FANTASIA("b"),
-    MISTERIO("a");
+    FICCAO("ficção"),
+    FANTASIA("fantasia"),
+    MISTERIO("misterio");
 
-    GeneroEnum(String a){
+    public final String value;
 
+    private GeneroEnum( String value ){
+        this.value = value;
     }
 }
