@@ -3,6 +3,7 @@ package com.example.demo.configuration.model;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,13 +11,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "autor")
+@Table( name = "autor" )
 public class Autor {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue( strategy = GenerationType.UUID )
     private UUID id;
+
+    @Column( nullable = false, length = 254 )
     private String nome;
+
+    @Column( nullable = false)
     private LocalDate data_nascimento;
+
+    @Column( nullable = false, length = 254 )
     private String nacionalidade;
 
     public Autor(){};
