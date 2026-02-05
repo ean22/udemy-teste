@@ -16,16 +16,18 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-class Autor {
+public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
+    @Column(nullable = false)
     private String nome;
     
-    @Column(name = "data_nascimento")
+    @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
     
+    @Column(nullable = false)
     private String nacionalidade;
 
     @OneToMany(mappedBy = "autor")

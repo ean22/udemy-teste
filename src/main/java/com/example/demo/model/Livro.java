@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,18 +25,23 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
+    @Column(nullable = false)
     private String isbn;
    
+    @Column(nullable = false)
     private String titulo;
    
-    @Column(name = "data_publicacao")
+    @Column(name = "data_publicacao", nullable = false)
     private LocalDate dataPublicacao;
    
-    private String genero;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private GeneroEnum genero;
   
+    @Column(precision = 18, scale = 2)
     private BigDecimal preco;
-   
-    @JoinColumn(name = "id_autor")
+  
+    @JoinColumn(name = "id_autor", nullable = false)
     @ManyToOne
     private Autor autor;
 }
