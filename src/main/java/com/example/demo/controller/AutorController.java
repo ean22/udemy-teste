@@ -7,6 +7,7 @@ import com.example.demo.model.Autor;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -27,10 +30,8 @@ public class AutorController {
         this.autorRepo = autorRepo;
     }
 
-
-
     @PostMapping("/create")
-    public ResponseEntity<Autor> save(@RequestParam Autor autor) {
+    public ResponseEntity<Autor> save(@RequestBody Autor autor) {
         Autor autorSalvo = autorRepo.save(autor);        
 
         URI uri = URI.create("autor/list/" + autorSalvo.getId());
@@ -38,17 +39,25 @@ public class AutorController {
         return ResponseEntity.created(uri).body(autorSalvo);
     }
 
-    
     @GetMapping("/list")
     public ResponseEntity<List<Autor>> listAll() {
         return ResponseEntity.ok(autorRepo.findAll());
     }
 
+    @GetMapping("/list/{uuid}")
+    public ResponseEntity<Autor> listByUuid(@PathVariable UUID uuid) {
+        return autorRepo.findById(uuid)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/delete/{uuid}")
-    public ResponseEntity delete(@PathVariable UUID uuid) {
+    public ResponseEntity<String> delete(@PathVariable UUID uuid) {
         
         autorRepo.deleteById(uuid);
-        return ResponseEntity.ok("Autor: %s Deleted".formatted(uuid));
+        return ResponseEntity.ok("Autor uuid: %s Deleted".formatted(uuid));
     }
+
+
     
 }
