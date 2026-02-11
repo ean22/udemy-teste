@@ -36,5 +36,9 @@ public class AutorController {
     }
 
     
+    @GetMapping
+    public ResponseEntity<List<Autor>> listAll() {
+        return ResponseEntity.ok(autorRepo.findAll());
+    }
     
 }
