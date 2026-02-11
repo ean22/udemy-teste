@@ -58,6 +58,20 @@ public class AutorController {
         return ResponseEntity.ok("Autor uuid: %s Deleted".formatted(uuid));
     }
 
+    @PutMapping("/update/{uuid}")
+    public ResponseEntity<Autor> update(@PathVariable UUID uuid, @RequestBody Autor autor) {
+        Optional<Autor> optionalAutor = autorRepo.findById(uuid);
 
+        if (optionalAutor.isPresent()) {
+            Autor updatedAutor = optionalAutor.get();
+
+            updatedAutor.setNome(autor.getNome());
+            updatedAutor.setDataNascimento(autor.getDataNascimento());
+            updatedAutor.setNacionalidade(autor.getNacionalidade());
+            
+            return ResponseEntity.ok(autorRepo.save(autor));
+        } else return ResponseEntity.notFound().build();
+        
+    }
     
 }
