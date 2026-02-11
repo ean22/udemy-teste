@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,10 +17,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -42,6 +45,6 @@ public class Livro {
     private BigDecimal preco;
   
     @JoinColumn(name = "id_autor", nullable = false)
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Autor autor;
 }

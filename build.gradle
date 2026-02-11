@@ -29,9 +29,11 @@ dependencies {
   	// testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
@@ -39,3 +41,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.named("bootRun") {
+    jvmArgs = ["-Xms512m", "-Xmx1024m"]
+}
+

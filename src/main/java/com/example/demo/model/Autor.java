@@ -12,10 +12,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
