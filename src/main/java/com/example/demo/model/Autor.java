@@ -32,6 +32,6 @@ public class Autor {
     @Column(nullable = false)
     private String nacionalidade;
 
-    @OneToMany(mappedBy = "autor")
-    private List<Livro> livros;
+    // @OneToMany(mappedBy = "autor")
+    // private List<Livro> livros;
 }

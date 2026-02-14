@@ -31,7 +31,7 @@ public class AutorController {
         this.autorRepo = autorRepo;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/save")
     public ResponseEntity<Autor> save(@RequestBody Autor autor) {
         Autor autorSalvo = autorRepo.save(autor);        
 
