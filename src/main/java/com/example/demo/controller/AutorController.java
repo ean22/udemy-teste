@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.configuration.AutorRepository;
 import com.example.demo.model.Autor;
+import com.example.demo.model.ListResponseDTO;
 
 import java.net.URI;
 import java.util.List;
@@ -40,8 +41,9 @@ public class AutorController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Autor>> listAll() {
-        return ResponseEntity.ok(autorRepo.findAll());
+    public ResponseEntity<ListResponseDTO<Autor>> listAll() {
+        ListResponseDTO<Autor> response = new ListResponseDTO<>(autorRepo.findAll().size(), autorRepo.findAll());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/list/{uuid}")
@@ -53,9 +55,16 @@ public class AutorController {
 
     @DeleteMapping("/delete/{uuid}")
     public ResponseEntity<String> delete(@PathVariable UUID uuid) {
-        
         autorRepo.deleteById(uuid);
+
         return ResponseEntity.ok("Autor uuid: %s Deleted".formatted(uuid));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteAll() {
+        autorRepo.deleteAll();
+        
+        return ResponseEntity.ok("All Autors deleted");
     }
 
     @PutMapping("/update/{uuid}")
@@ -69,7 +78,7 @@ public class AutorController {
             updatedAutor.setDataNascimento(autor.getDataNascimento());
             updatedAutor.setNacionalidade(autor.getNacionalidade());
             
-            return ResponseEntity.ok(autorRepo.save(autor));
+            return ResponseEntity.ok(autorRepo.save(updatedAutor));
         } else return ResponseEntity.notFound().build();
         
     }

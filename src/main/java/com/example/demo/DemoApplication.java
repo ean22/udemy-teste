@@ -21,7 +21,7 @@ public class DemoApplication {
 
 		AutorRepository autorRepository = context.getBean(AutorRepository.class);
 
-		exemplo(autorRepository);
+		// exemplo(autorRepository);
 	}
 
 	public static void exemplo(JpaRepository repository){
