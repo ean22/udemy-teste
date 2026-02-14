@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Autor;
+import com.example.demo.repository.AutorRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,8 +9,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.example.demo.configuration.AutorRepository;
 
 @SpringBootTest
 public class AutorControllerTest {

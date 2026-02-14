@@ -2,9 +2,9 @@ package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.configuration.AutorRepository;
 import com.example.demo.model.Autor;
 import com.example.demo.model.ListResponseDTO;
+import com.example.demo.repository.AutorRepository;
 
 import java.net.URI;
 import java.util.List;
@@ -42,7 +42,10 @@ public class AutorController {
 
     @GetMapping("/list")
     public ResponseEntity<ListResponseDTO<Autor>> listAll() {
-        ListResponseDTO<Autor> response = new ListResponseDTO<>(autorRepo.findAll().size(), autorRepo.findAll());
+        
+        List<Autor> autors = autorRepo.findAll();
+
+        ListResponseDTO<Autor> response = new ListResponseDTO<>(autors.size(), autors);
         return ResponseEntity.ok(response);
     }
 
