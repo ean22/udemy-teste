@@ -102,9 +102,6 @@ public class LivroController {
     public ResponseEntity<String> deleteByUuid(@PathVariable UUID uuid) {
         livroRepo.deleteById(uuid);
 
-        return ResponseEntity.ok("Livro uuid: %s Deleted ");
+        return ResponseEntity.ok("Livro uuid: %s Deleted".formatted(uuid));
     }
-
-
-    
 }
