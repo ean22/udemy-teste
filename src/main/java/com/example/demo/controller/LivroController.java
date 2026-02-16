@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 
 
@@ -28,24 +29,24 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 @RequestMapping("/livro")
 public class LivroController {
-    AutorRepository autorRepository;
-    LivroRepository livroRepository;
+    AutorRepository autorRepo;
+    LivroRepository livroRepo;
 
-    LivroController(AutorRepository autorRepository, LivroRepository livroRepository) {
-        this.autorRepository = autorRepository;
-        this.livroRepository = livroRepository;
+    LivroController(AutorRepository autorRepo, LivroRepository livroRepo) {
+        this.autorRepo = autorRepo;
+        this.livroRepo = livroRepo;
     }
     
     @PostMapping("/save/{uuid}")
     public ResponseEntity<?> save(@PathVariable UUID uuid ,@RequestBody Livro livro) {    
-        Optional<Autor> optionalAutor = autorRepository.findById(uuid);
+        Optional<Autor> optionalAutor = autorRepo.findById(uuid);
 
         if (optionalAutor.isPresent()) {
             Autor autor = optionalAutor.get();
             
             livro.setAutor(autor);
 
-            Livro saved = livroRepository.save(livro);
+            Livro saved = livroRepo.save(livro);
             URI uri = URI.create("/livro/list/" + saved.getId());
             livro.setAutor(autor);
 
@@ -64,7 +65,7 @@ public class LivroController {
 
     @GetMapping("/list")
     public ResponseEntity<ListResponseDTO<Livro>> listAll() {
-        List<Livro> livroList = livroRepository.findAll();
+        List<Livro> livroList = livroRepo.findAll();
         ListResponseDTO<Livro> response = new ListResponseDTO<>(livroList.size(), livroList);
 
         return ResponseEntity.ok(response);
@@ -73,14 +74,14 @@ public class LivroController {
     @GetMapping("/list/{uuid}")
     public ResponseEntity<Livro> listByUuid(@PathVariable UUID uuid) {
     
-        return livroRepository.findById(uuid)
+        return livroRepo.findById(uuid)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/update/{uuid}")
     public ResponseEntity<Livro> update(@PathVariable UUID uuid, @RequestBody Livro livro) {
-        Optional<Livro> optionalLivro = livroRepository.findById(uuid);
+        Optional<Livro> optionalLivro = livroRepo.findById(uuid);
 
         if (optionalLivro.isPresent()) {
             Livro updatedLivro = optionalLivro.get();
@@ -91,13 +92,18 @@ public class LivroController {
             updatedLivro.setGenero(livro.getGenero());
             updatedLivro.setDataPublicacao(livro.getDataPublicacao());
 
-            return ResponseEntity.ok(livroRepository.save(updatedLivro));
+            return ResponseEntity.ok(livroRepo.save(updatedLivro));
         }
         
         return ResponseEntity.notFound().build();
     }
 
-    
+    @DeleteMapping("/delete/{uuid}")
+    public ResponseEntity<String> deleteByUuid(@PathVariable UUID uuid) {
+        livroRepo.deleteById(uuid);
+
+        return ResponseEntity.ok("Livro uuid: %s Deleted ");
+    }
 
 
     

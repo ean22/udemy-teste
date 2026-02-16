@@ -44,7 +44,7 @@ public class AutorController {
     public ResponseEntity<ListResponseDTO<Autor>> listAll() {
         List<Autor> autorList = autorRepo.findAll();
         ListResponseDTO<Autor> response = new ListResponseDTO<>(autorList.size(), autorList);
-        
+
         return ResponseEntity.ok(response);
     }
 
@@ -56,7 +56,7 @@ public class AutorController {
     }
 
     @DeleteMapping("/delete/{uuid}")
-    public ResponseEntity<String> delete(@PathVariable UUID uuid) {
+    public ResponseEntity<String> deleteByUuid(@PathVariable UUID uuid) {
         autorRepo.deleteById(uuid);
 
         return ResponseEntity.ok("Autor uuid: %s Deleted".formatted(uuid));
