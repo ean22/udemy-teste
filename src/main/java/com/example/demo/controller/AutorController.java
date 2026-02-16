@@ -66,7 +66,7 @@ public class AutorController {
     public ResponseEntity<String> deleteAll() {
         autorRepo.deleteAll();
         
-        return ResponseEntity.ok("All Autors deleted");
+        return ResponseEntity.ok("All Autors Deleted");
     }
 
     @PutMapping("/update/{uuid}")

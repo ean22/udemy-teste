@@ -104,4 +104,11 @@ public class LivroController {
 
         return ResponseEntity.ok("Livro uuid: %s Deleted".formatted(uuid));
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteAll() {
+        livroRepo.deleteAll();
+
+        return ResponseEntity.ok("All Livros Deleted");
+    }
 }
