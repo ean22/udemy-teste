@@ -88,14 +88,16 @@ public class LivroController {
             updatedLivro.setIsbn(livro.getIsbn());
             updatedLivro.setPreco(livro.getPreco());
             updatedLivro.setTitulo(livro.getTitulo());
+            updatedLivro.setGenero(livro.getGenero());
             updatedLivro.setDataPublicacao(livro.getDataPublicacao());
-            updatedLivro.setAutor(livro.getAutor());
 
             return ResponseEntity.ok(livroRepository.save(updatedLivro));
         }
         
         return ResponseEntity.notFound().build();
     }
+
+    
 
 
     
