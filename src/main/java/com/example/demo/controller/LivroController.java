@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -74,6 +76,25 @@ public class LivroController {
         return livroRepository.findById(uuid)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/update/{uuid}")
+    public ResponseEntity<Livro> update(@PathVariable UUID uuid, @RequestBody Livro livro) {
+        Optional<Livro> optionalLivro = livroRepository.findById(uuid);
+
+        if (optionalLivro.isPresent()) {
+            Livro updatedLivro = optionalLivro.get();
+
+            updatedLivro.setIsbn(livro.getIsbn());
+            updatedLivro.setPreco(livro.getPreco());
+            updatedLivro.setTitulo(livro.getTitulo());
+            updatedLivro.setDataPublicacao(livro.getDataPublicacao());
+            updatedLivro.setAutor(livro.getAutor());
+
+            return ResponseEntity.ok(livroRepository.save(updatedLivro));
+        }
+        
+        return ResponseEntity.notFound().build();
     }
 
 
