@@ -71,5 +71,12 @@ public class LivroController {
         return ResponseEntity.ok(response);
     }
     
-
+    @GetMapping("/list/{uuid}")
+    public ResponseEntity<Livro> listByUuid(@PathVariable UUID uuid) {
+    
+        return livroRepository.findById(uuid)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+    
 }
