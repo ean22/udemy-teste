@@ -10,6 +10,7 @@ import com.example.demo.repository.AutorRepository;
 import com.example.demo.repository.LivroRepository;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,6 +21,9 @@ import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -58,5 +62,14 @@ public class LivroController {
         }
 
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<ListResponseDTO<Livro>> listAll() {
+        List<Livro> livroList = livroRepository.findAll();
+        ListResponseDTO<Livro> response = new ListResponseDTO<>(livroList.size(), livroList);
+
+        return ResponseEntity.ok(response);
+    }
+    
 
 }

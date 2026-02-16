@@ -42,10 +42,9 @@ public class AutorController {
 
     @GetMapping("/list")
     public ResponseEntity<ListResponseDTO<Autor>> listAll() {
+        List<Autor> autorList = autorRepo.findAll();
+        ListResponseDTO<Autor> response = new ListResponseDTO<>(autorList.size(), autorList);
         
-        List<Autor> autors = autorRepo.findAll();
-
-        ListResponseDTO<Autor> response = new ListResponseDTO<>(autors.size(), autors);
         return ResponseEntity.ok(response);
     }
 
