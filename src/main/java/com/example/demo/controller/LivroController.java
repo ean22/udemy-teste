@@ -39,7 +39,7 @@ public class LivroController {
         this.livroRepo = livroRepo;
     }
     
-    @PostMapping("/save/{uuid}")
+    @PostMapping("/{uuid}")
     public ResponseEntity<?> save(@PathVariable UUID uuid ,@RequestBody Livro livro) {    
         Optional<Autor> optionalAutor = autorRepo.findById(uuid);
 
@@ -65,7 +65,7 @@ public class LivroController {
 
     }
 
-    @GetMapping("/list")
+    @GetMapping()
     public ResponseEntity<ListResponseDTO<Livro>> listAll() {
         List<Livro> livroList = livroRepo.findAll();
         ListResponseDTO<Livro> response = new ListResponseDTO<>(livroList.size(), livroList);
@@ -73,7 +73,7 @@ public class LivroController {
         return ResponseEntity.ok(response);
     }
     
-    @GetMapping("/list/{uuid}")
+    @GetMapping("/{uuid}")
     public ResponseEntity<Livro> listByUuid(@PathVariable UUID uuid) {
     
         return livroRepo.findById(uuid)
@@ -81,7 +81,7 @@ public class LivroController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/list/autor/{uuid}")
+    @GetMapping("autor/{uuid}")
     public ResponseEntity<List<Livro>> listByAutor(@PathVariable UUID uuid) {
 
         return autorRepo.findById(uuid)
@@ -91,7 +91,7 @@ public class LivroController {
     }
     
 
-    @PutMapping("/update/{uuid}")
+    @PutMapping("/{uuid}")
     public ResponseEntity<Livro> update(@PathVariable UUID uuid, @RequestBody Livro livro) {
         Optional<Livro> optionalLivro = livroRepo.findById(uuid);
 
@@ -110,14 +110,14 @@ public class LivroController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/delete/{uuid}")
+    @DeleteMapping("/{uuid}")
     public ResponseEntity<String> deleteByUuid(@PathVariable UUID uuid) {
         livroRepo.deleteById(uuid);
 
         return ResponseEntity.ok("Livro uuid: %s Deleted".formatted(uuid));
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping()
     public ResponseEntity<String> deleteAll() {
         livroRepo.deleteAll();
 
