@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -78,6 +80,16 @@ public class LivroController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/list/autor/{uuid}")
+    public ResponseEntity<List<Livro>> listByAutor(@PathVariable UUID uuid) {
+
+        return autorRepo.findById(uuid)
+                .map(autor -> ResponseEntity.ok(livroRepo.findByAutor(autor)))
+                .orElse(ResponseEntity.notFound().build());  
+        
+    }
+    
 
     @PutMapping("/update/{uuid}")
     public ResponseEntity<Livro> update(@PathVariable UUID uuid, @RequestBody Livro livro) {
