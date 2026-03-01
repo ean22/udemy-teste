@@ -3,24 +3,22 @@ package com.example.demo.service;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.AutorDTO;
+import com.example.demo.mapper.AutorMapper;
 import com.example.demo.model.Autor;
 import com.example.demo.repository.AutorRepository;
 
 @Service
 public class AutorService {
     private final AutorRepository autorRepo;
+    private final AutorMapper autorMapper;
 
-    AutorService(AutorRepository autorRepo) {
+    AutorService(AutorRepository autorRepo, AutorMapper autorMapper) {
         this.autorRepo = autorRepo;
+        this.autorMapper = autorMapper;
     }
 
     public Autor save(AutorDTO autorDto) {
-        Autor autor = new Autor();
-        autor.setNome(autorDto.nome());
-        autor.setDataNascimento(autorDto.dataNascimento());
-        autor.setNacionalidade(autorDto.nacionalidade());
-
-        return autorRepo.save(autor);
+        return autorRepo.save(autorMapper.toAutor(autorDto));
     }
 
 
