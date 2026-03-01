@@ -1,26 +1,18 @@
 package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.dto.AutorDTO;
-import com.example.demo.dto.ListResponseDTO;
+import com.example.demo.model.Autor;
 import com.example.demo.service.AutorService;
 
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-
-
 
 @RestController
 @RequestMapping("/autores")
@@ -32,8 +24,15 @@ public class AutorController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> salvar(@RequestBody AutorDTO autor) {
-        return ResponseEntity.created(null).body("null");
+    public ResponseEntity<Void> salvar(@RequestBody AutorDTO autorDto) {
+        Autor autor = autorServ.save(autorDto);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{uuid}")
+                .buildAndExpand(autor.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 }
 
