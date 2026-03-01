@@ -3,8 +3,8 @@ package com.example.demo.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.ListResponseDTO;
 import com.example.demo.model.Livro;
+import com.example.demo.dto.ListResponseDTO;
 import com.example.demo.model.Autor;
 import com.example.demo.repository.AutorRepository;
 import com.example.demo.repository.LivroRepository;

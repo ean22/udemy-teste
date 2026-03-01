@@ -2,10 +2,9 @@ package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.Autor;
-import com.example.demo.model.AutorDTO;
-import com.example.demo.model.ListResponseDTO;
-import com.example.demo.repository.AutorRepository;
+import com.example.demo.dto.AutorDTO;
+import com.example.demo.dto.ListResponseDTO;
+import com.example.demo.service.AutorService;
 
 import java.net.URI;
 import java.util.List;
@@ -26,16 +25,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 @RequestMapping("/autores")
 public class AutorController {
-    AutorRepository autorRepo;
+    private final AutorService autorServ;
 
-    AutorController(AutorRepository autorRepo) {
-        this.autorRepo = autorRepo;
+    AutorController(AutorService autorServ) {
+        this.autorServ = autorServ;
     }
 
     @PostMapping()
     public ResponseEntity<String> salvar(@RequestBody AutorDTO autor) {
-
-
         return ResponseEntity.created(null).body("null");
     }
 }
