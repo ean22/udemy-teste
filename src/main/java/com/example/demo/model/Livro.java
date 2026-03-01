@@ -16,6 +16,8 @@ import jakarta.persistence.ManyToOne;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -44,6 +46,15 @@ public class Livro {
   
     @Column(precision = 18, scale = 2)
     private BigDecimal preco;
+
+    @Column(name = "data_cadastro")
+    private LocalDateTime dataCadastro;
+
+    @Column(name = "data_atualizacao")
+    private LocalDateTime dataAtualizacao;
+
+    @Column(name = "id_usuario")
+    private UUID idUsuario;
   
     @JoinColumn(name = "id_autor", nullable = false)
     @ManyToOne()
