@@ -17,7 +17,7 @@ CREATE TABLE livro (
     preco NUMERIC( 18, 2 ),
     data_cadastro TIMESTAMP,
     data_atualizacao TIMESTAMP,
-    id_usuario UUID
+    id_usuario UUID,
     id_autor UUID NOT NULL REFERENCES Autor( id ),
 
     CONSTRAINT chk_genero CHECK( genero in ( 'FICCAO', 'FANTASIA', 'MISTERIO' ) )

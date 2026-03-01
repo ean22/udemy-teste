@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -29,6 +30,16 @@ public class Autor {
     
     @Column(nullable = false)
     private String nacionalidade;
+
+    @Column(name = "data_cadastro")
+    private LocalDateTime dataCadastro;
+
+    @Column(name = "data_atualizacao")
+    private LocalDateTime dataAtualizacao;
+
+    @Column(name = "id_usuario")
+    private UUID idUsuario;
+
 
     // @OneToMany(mappedBy = "autor")
     // private List<Livro> livros;
