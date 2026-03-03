@@ -24,10 +24,10 @@ public class AutorService {
         return autorRepo.save(autorMapper.toAutor(autorDto));
     }
 
-    // public ListResponseDTO<Autor> listAll() {
-    //     ListResponseDTO<AutorDTO> list = new ListResponseDTO<>();
-        
-    //     List<Autor> listAutor = autorRepo.findAll();
-    // }
+    public ListResponseDTO<AutorDTO> listAllDto() {
+        return new ListResponseDTO<AutorDTO>(
+                autorRepo.listAllDto().size(),
+                autorRepo.listAllDto());
+    }
 
 }
