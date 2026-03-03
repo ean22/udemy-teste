@@ -39,10 +39,10 @@ public class AutorController {
         return ResponseEntity.created(location).build();
     }
 
-    // @GetMapping()
-    // public ListResponseDTO<AutorDTO> listAll() {
-    //     autorServ.;
-    // }
+    @GetMapping()
+    public ListResponseDTO<AutorDTO> listAll() {
+        return autorServ.listAllDto();
+    }
     
 }
 
