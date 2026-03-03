@@ -1,8 +1,11 @@
 package com.example.demo.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.example.demo.dto.AutorDTO;
 import com.example.demo.model.Autor;
 
+@Component
 public class AutorMapper {
     public Autor toAutor(AutorDTO autorDto) {
         Autor autor = new Autor();
