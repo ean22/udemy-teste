@@ -12,7 +12,11 @@ import java.util.UUID;
 public interface AutorRepository extends JpaRepository<Autor, UUID> {
     
     @Query("""
-            select a.id, a.nome, a.dataNascimento, a.nacionalidade 
+            select new com.example.demo.dto.AutorDTO(
+                a.nome, 
+                a.dataNascimento, 
+                a.nacionalidade 
+            ) 
             from Autor as a
             order by a.nome
             """)
