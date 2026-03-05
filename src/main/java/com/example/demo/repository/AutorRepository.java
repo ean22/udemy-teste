@@ -13,6 +13,7 @@ public interface AutorRepository extends JpaRepository<Autor, UUID> {
     
     @Query("""
             select new com.example.demo.dto.AutorDTO(
+                a.id,
                 a.nome, 
                 a.dataNascimento, 
                 a.nacionalidade 
