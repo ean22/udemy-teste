@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
-@RequestMapping("/autores")
+@RequestMapping("/autor")
 public class AutorController {
     private final AutorService autorServ;
 
