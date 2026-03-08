@@ -9,12 +9,14 @@ import com.example.demo.model.Autor;
 import com.example.demo.service.AutorService;
 
 import java.net.URI;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/autor")
@@ -26,7 +28,7 @@ public class AutorController {
     }
 
     @PostMapping()
-    public ResponseEntity<Void> salvar(@RequestBody AutorDTO autorDto) {
+    public ResponseEntity<Void> save(@RequestBody AutorDTO autorDto) {
         Autor autor = autorServ.save(autorDto);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -41,7 +43,13 @@ public class AutorController {
     public ListResponseDTO<AutorDTO> listAll() {
         return autorServ.listAllDto();
     }
-    
+
+    @GetMapping("/{uuid}")
+    public ResponseEntity<AutorDTO> listByUUID(@PathVariable UUID uuid) {
+        return autorServ.findDtoByUuid(uuid)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
 
 

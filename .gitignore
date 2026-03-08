@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+### Secrets ###
+id_ed25519*
+id_rsa
+*.pem
