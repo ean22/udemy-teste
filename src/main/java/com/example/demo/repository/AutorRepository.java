@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface AutorRepository extends JpaRepository<Autor, UUID> {
@@ -33,7 +34,7 @@ public interface AutorRepository extends JpaRepository<Autor, UUID> {
             from Autor as a
             where a.id = :id
             """)
-            AutorDTO findDtoById(@Param("id") UUID uuid);
+    Optional<AutorDTO> findDtoById(@Param("id") UUID uuid);
 
 
 }

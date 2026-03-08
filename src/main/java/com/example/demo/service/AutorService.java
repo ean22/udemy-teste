@@ -8,6 +8,9 @@ import com.example.demo.mapper.AutorMapper;
 import com.example.demo.model.Autor;
 import com.example.demo.repository.AutorRepository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class AutorService {
     private final AutorRepository autorRepo;
@@ -26,6 +29,10 @@ public class AutorService {
         return new ListResponseDTO<AutorDTO>(
                 autorRepo.listAllDto().size(),
                 autorRepo.listAllDto());
+    }
+
+    public Optional<AutorDTO> findDtoByUuid(UUID uuid) {
+        return autorRepo.findDtoById(uuid);
     }
 
 }
